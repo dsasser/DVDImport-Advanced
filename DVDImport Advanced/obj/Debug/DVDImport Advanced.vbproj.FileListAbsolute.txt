@@ -1,0 +1,22 @@
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.exe
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.pdb
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.xml
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.frmMain.resources
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.frmLogin.resources
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.Resources.resources
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.vbproj.GenerateResource.Cache
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.exe
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.xml
+C:\Documents and Settings\dsasser\My Documents\Visual Studio 2008\Projects\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.pdb
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.exe
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.xml
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.pdb
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.exe
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.pdb
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\bin\Debug\DVDImport Advanced.xml
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\ResolveAssemblyReference.cache
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.frmMain.resources
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.frmLogin.resources
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport_Advanced.Resources.resources
+F:\Work\Visual Studio\DVDImport Advanced\DVDImport Advanced\obj\Debug\DVDImport Advanced.vbproj.GenerateResource.Cache

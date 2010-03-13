@@ -14,32 +14,30 @@ Public Class frmMain
     Public strOLEDB = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\FacilData50.mdb;"
     Public drupal_cn As New Odbc.OdbcConnection(strODBC) 'drupal database connection
     Public facil_cn As New OleDb.OleDbConnection(strOLEDB) 'facil database connection
-    Public strUsername As String
-    Public strDrupal_ID As String
-    Public strProducer_ID As Integer
-    Public strProject_ID As Integer
+    Public strUsername As String 'drupal username
+    Public strDrupal_ID As String 'drupal id
+    Public strProducer_ID As Integer 'producer id to be retreived from drupal Profile
+    Public strProject_ID() As String 'the selected ProjectID from Facil
     Public strProgram_Code As String 'TelVue METADATA
-    Public strProgram As String 'TelVue METADATA
-    Public strEpisode As String 'TelVue METADATA
+    Public strProgram() As String 'TelVue METADATA
+    Public strEpisode() As String   'TelVue METADATA
     Public strEpisode_code As String 'TelVue METADATA
-    Public strDescription As String 'TelVue METADATA
+    Public strDescription() As String 'TelVue METADATA
     Public strDelete_Datetime As String 'TelVue METADATA
     Public strImport_Datetime As String 'TelVue METADATA
-    Public intExpected_Duration As Integer 'TelVue METADATA
+    Public strExpected_Duration() As String 'TelVue METADATA
     Public strExpected_Filename As String 'TelVue METADATA
     Public strLocation As String 'TelVue METADATA
     Public strContributor As String 'TelVue METADATA
     Public strTelVue_Username As String = "psgadmin" 'TelVue METADATA
-    Public strSource_ID As String 'Facil Source_ID from Project Defaults
-
-
-    Public Level1 As Dictionary(Of Integer, String)
-    Public Level2 As Dictionary(Of Integer, String)
+    Public strSource_ID() As String 'Facil Source_ID from Project Defaults
+    Public strSubject_ID() As String 'Facil SubjectID from Project Defaults
+    Public i As Integer = 0 'counter
 
 #End Region
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        'MsgBox(ComboBox1.SelectedIndex)
         'Setup Application Defaults
         My_Class.GetApplicationDefaults()
         'Open Drupal Database
@@ -53,16 +51,13 @@ Public Class frmMain
         'Get Projects from Facil and place into listbox
         'My_Class.AddProjects()
         'User Selects a Project
-        My_Class.SelectProject()
+        'My_Class.SelectProject()
         'Get project defaults for selected Project
         'My_Class.GetProjectDefaults()
-        'Get program Name from user
-
         'Select DVD Source
 
         'Do the copy process
 
-        'Get Program ID from TelVue
 
         'Submit METADATA for Program
 
@@ -75,29 +70,20 @@ Public Class frmMain
         facil_cn.Close() 'close facil database
     End Sub
 
-
-
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If ListView1.SelectedItems.Count < 1 Then
-            MsgBox("You must select a project")
-            Exit Sub
+        If ComboBox1.SelectedIndex = -1 Then
+            MsgBox("You must select a project from the drop down list")
+            ComboBox1.Focus()
+        Else 'project has been selected and ok to move on
+            'code to move on
         End If
         
     End Sub
 
-    Private Sub ListView1_ItemSelectionChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.ListViewItemSelectionChangedEventArgs) Handles ListView1.ItemSelectionChanged
-        'If ListView1.SelectedItems(0).Text.Length < 1 Then
-        ' MsgBox("no project selected")
-        ' Else
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+    Handles ComboBox1.SelectedIndexChanged
         My_Class.GetProjectDefaults()
-        'End If
-
-        'strProject()
     End Sub
 
 
-
-    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        MsgBox(ComboBox1.SelectedIndex)
-    End Sub
 End Class

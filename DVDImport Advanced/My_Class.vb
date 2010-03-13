@@ -5,21 +5,6 @@ Imports System.Data.Odbc
 Public Class My_Class
 
 
-
-    Public Level1() As ArrayList = { _
-    New ArrayList, _
-    New ArrayList, _
-    New ArrayList}
-    Public Level2 As ArrayList
-
-
-    Dim primarycolors() As Pen = { _
-        New Pen(Color.Red), _
-        New Pen(Color.RosyBrown), _
-        New Pen(Color.Coral) _
-    }
-
-
     Public Shared Sub OpenDrupalDatabase()
         'open the database
         Try
@@ -112,7 +97,7 @@ Public Class My_Class
         Dim cmd As OleDbCommand
         Dim odr As OleDbDataReader
         Dim sql As String
-        Dim i As Integer = 0
+        'Dim i As Integer = 0
 
         'sql = "SELECT * from tblProject WHERE ProducerID = " & frmMain.strProducer_ID
 
@@ -156,56 +141,71 @@ Public Class My_Class
         sql = sql & "Iif([ProjectUDF3] Is Not Null,[ProjectUDF3],0) AS ProjectUDF3_, "
         sql = sql & "Iif([OldProjectNum] Is Not Null,[OldProjectNum],0) AS OldProjectNum_, "
         sql = sql & "Iif([ProjectReviseDate] Is Not Null,[ProjectReviseDate],0) AS ProjectReviseDate_, "
-        sql = sql & "Iif([ProjectReviseStaff] Is Not Null,[ProjectReviseStaff],0) AS ProjectReviseStaff_ "
-        sql = sql & "FROM(tblProject)WHERE ProducerID = " & frmMain.strProducer_ID
+        sql = sql & "Iif([ProjectReviseStaff] Is Not Null,[ProjectReviseStaff],0) AS ProjectReviseStaff_, "
+        'sql = sql & "Second([DefaultLength]) AS Duration_Seconds, "
+        'sql = sql & "Minute([DefaultLength]) As Duration_Minutes, "
+        'sql = sql & "Hour([DefaultLength]) As Duration_Hours "
+        sql = sql & "Iif([DefaultLength] Is Not Null,Second([DefaultLength])+ Minute([DefaultLength])*60+Hour([DefaultLength])*3600,0) AS Total_Seconds " 'nasty hack to get the duration in seconds
+        sql = sql & " FROM(tblProject)WHERE ProducerID = " & frmMain.strProducer_ID
 
 
-        'MsgBox(sql)
+        MsgBox(sql)
+
         Try
             frmMain.facil_cn.Open()
             cmd = New OleDbCommand(sql, frmMain.facil_cn)
             odr = cmd.ExecuteReader
-            If odr.HasRows Then
-                While odr.Read()
-                    AddProjects(odr)
-                End While
-            Else
-                MsgBox("No rows")
-            End If
         Catch ex As Exception
             MsgBox("Could not connect to Facil: " & ex.Message)
         End Try
+        If odr.HasRows Then
+            While odr.Read()
+                AddProjects(odr)
+            End While
+        Else
+            MsgBox("No rows")
+        End If
+
     End Sub
     Public Shared Sub AddProjects(ByVal odr)
-        Dim objItem As ListViewItem 'for building the selectable list view
-        objItem = frmMain.ListView1.Items.Add(odr(2))
-        With objItem
-            .SubItems.Add(odr(0))
-            .SubItems.Add(odr(3))
-            .SubItems.Add(odr(9))
-            .SubItems.Add(odr(18))
-            .SubItems.Add(odr(23))
-            .SubItems.Add(odr(26))
-            '.ImageIndex = 0
-        End With
-        Dim dictionary As New Dictionary(Of Integer, String)
-        With frmMain.ComboBox1
-            .Items.Add(odr(2))
-        End With
-        'With frmMain.Level2
-        '    .Insert(0, odr(2))
+        'Dim objItem As ListViewItem 'for building the selectable list view
+        'objItem = frmMain.ListView1.Items.Add(odr(2))
+        'With objItem
+        '    .SubItems.Add(odr(0))
+        '    .SubItems.Add(odr(3))
+        '    .SubItems.Add(odr(9))
+        '    .SubItems.Add(odr(18))
+        '    .SubItems.Add(odr(23))
+        '    .SubItems.Add(odr(26))
+        '    '.ImageIndex = 0
         'End With
-        'add the project name to the second level 
-        'frmMain.Level2 = Nothing
-        Try
-            dictionary.Add(0, odr(2))
-            'frmMain.Level2.SetValue(odr(2), 0)
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
 
-        'frmMain.Level2.Insert(0, odr(2).ToString)
-        ' frmMain.Level1.Insert(i, frmMain.Level2)
+        'fill the combobox with the ProjectTitle
+        With frmMain.ComboBox1
+            .Items.Add(odr(2).ToString)
+        End With
+
+        'fill the Project Defaults Arrays - first redim is necessary
+        ReDim Preserve frmMain.strProject_ID(frmMain.i + 1)
+        ReDim Preserve frmMain.strProgram(frmMain.i + 1)
+        ReDim Preserve frmMain.strDescription(frmMain.i + 1)
+        ReDim Preserve frmMain.strEpisode(frmMain.i + 1)
+        ReDim Preserve frmMain.strExpected_Duration(frmMain.i + 1)
+        ReDim Preserve frmMain.strSource_ID(frmMain.i + 1)
+        ReDim Preserve frmMain.strSubject_ID(frmMain.i + 1)
+        frmMain.strProject_ID(frmMain.i) = odr(0).ToString 'ProjectID
+        frmMain.strProgram(frmMain.i) = odr(2).ToString 'Program/Project Title
+        frmMain.strDescription(frmMain.i) = odr(3).ToString 'Description
+        frmMain.strEpisode(frmMain.i) = odr(19).ToString 'Episode
+        frmMain.strExpected_Duration(frmMain.i) = odr(41).ToString 'Expected_duration
+        frmMain.strSource_ID(frmMain.i) = odr(22) 'Source_ID
+        frmMain.strSubject_ID(frmMain.i) = odr(25).ToString 'Subject_ID
+
+      
+
+
+        frmMain.i = frmMain.i + 1 'step the counter for each row
+
 
     End Sub
     Public Shared Sub GetProducerID()
@@ -215,26 +215,27 @@ Public Class My_Class
 
     End Sub
     Public Shared Sub GetProjectDefaults()
-        If frmMain.ListView1.SelectedItems.Count > 0 Then
-            frmMain.strProgram = frmMain.ListView1.SelectedItems(0).Text 'Program Name
-            frmMain.strProject_ID = frmMain.ListView1.SelectedItems(0).SubItems(1).Text 'Project Id
-            frmMain.strDescription = frmMain.ListView1.SelectedItems(0).SubItems(2).Text 'Description
-            frmMain.strSource_ID = frmMain.ListView1.SelectedItems(0).SubItems(5).Text 'source id
-            frmMain.strLocation = "PCM"
-            'populate labels and textboxes for user visibility
-            frmMain.txtName.Text = frmMain.strUsername
-            frmMain.txtProgram.Text = frmMain.strProgram
-            frmMain.txtDescription.Text = frmMain.strDescription
-            frmMain.txtLocation.Text = frmMain.strLocation
-            frmMain.txtEpisode.Text = "Not Set"
-            frmMain.txtEpisode_Code.Text = "Not Set"
-            frmMain.txtProgram_Code.Text = "Not Set"
+
+        'fill in the textboxes
+        frmMain.txtName.Text = frmMain.strUsername
+        frmMain.txtProgram.Text = frmMain.strProgram(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtProgram_Code.Text = "Not Set"
+        frmMain.txtDescription.Text = frmMain.strDescription(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtEpisode.Text = frmMain.strEpisode(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtEpisode_Code.Text = "Not Set"
+        frmMain.txtLocation.Text = System.Environment.MachineName
+        frmMain.txtProject_ID.Text = frmMain.strProject_ID(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtSource_ID.Text = frmMain.strSource_ID(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtSubject_ID.Text = frmMain.strSubject_ID(frmMain.ComboBox1.SelectedIndex)
+        frmMain.txtDuration.Text = frmMain.strExpected_Duration(frmMain.ComboBox1.SelectedIndex)
 
 
-        Else
-            Console.WriteLine("No project selected. {My_Class.GetProjectDefaults()}")
-            Exit Sub
-        End If
+
+
+        'Else
+        'Console.WriteLine("No project selected. {My_Class.GetProjectDefaults()}")
+        'Exit Sub
+        'End If
 
 
 
@@ -245,18 +246,18 @@ Public Class My_Class
         Dim intWidth As Integer
         'setup ListView1
         'Add the column headers.
-        intWidth = frmMain.ListView1.Width - 5
-        frmMain.ListView1.Columns.Add("Project Title", 700)
-        frmMain.ListView1.Columns.Add("Project ID", 0)
-        frmMain.ListView1.Columns.Add("Project Description", 0)
-        frmMain.ListView1.Columns.Add("Producer ID", 0)
-        frmMain.ListView1.Columns.Add("Project Series", 0)
-        frmMain.ListView1.Columns.Add("Project Source ID", 0)
-        frmMain.ListView1.Columns.Add("Subject ID", 0) 'CInt(intWidth / 7))
-        frmMain.ListView1.MultiSelect = False
-        frmMain.ListView1.FullRowSelect = True
-        frmMain.ListView1.GridLines = True
-        frmMain.ListView1.View = View.Details
+        'intWidth = frmMain.ListView1.Width - 5
+        'frmMain.ListView1.Columns.Add("Project Title", 700)
+        'frmMain.ListView1.Columns.Add("Project ID", 30)
+        'frmMain.ListView1.Columns.Add("Project Description", 30)
+        'frmMain.ListView1.Columns.Add("Producer ID", 30)
+        'frmMain.ListView1.Columns.Add("Project Series", 30)
+        'frmMain.ListView1.Columns.Add("Project Source ID", 30)
+        'frmMain.ListView1.Columns.Add("Subject ID", 30) 'CInt(intWidth / 7))
+        'frmMain.ListView1.MultiSelect = False
+        'frmMain.ListView1.FullRowSelect = True
+        'frmMain.ListView1.GridLines = True
+        'frmMain.ListView1.View = View.Details
 
         'setup WebBrowser1
         Dim NewURI As New Uri("Http://sandbox/test/dvdimport.html")

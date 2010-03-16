@@ -39,25 +39,29 @@ Partial Class frmMain
         Me.txtName = New System.Windows.Forms.TextBox
         Me.lblName = New System.Windows.Forms.Label
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox
-        Me.lblProjectInfo = New System.Windows.Forms.Label
-        Me.txtProject_ID = New System.Windows.Forms.TextBox
-        Me.lblProject_ID = New System.Windows.Forms.Label
-        Me.txtSource_ID = New System.Windows.Forms.TextBox
-        Me.lblSourceID = New System.Windows.Forms.Label
-        Me.txtSubject_ID = New System.Windows.Forms.TextBox
-        Me.lblSubjectID = New System.Windows.Forms.Label
         Me.txtDuration = New System.Windows.Forms.TextBox
         Me.lblExpected_Duration = New System.Windows.Forms.Label
+        Me.txtSubject_ID = New System.Windows.Forms.TextBox
+        Me.lblSubjectID = New System.Windows.Forms.Label
+        Me.txtSource_ID = New System.Windows.Forms.TextBox
+        Me.lblSourceID = New System.Windows.Forms.Label
+        Me.txtProject_ID = New System.Windows.Forms.TextBox
+        Me.lblProject_ID = New System.Windows.Forms.Label
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser
+        Me.txtSource = New System.Windows.Forms.TextBox
+        Me.btnSelect_Source = New System.Windows.Forms.Button
+        Me.lblSource = New System.Windows.Forms.Label
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(962, 641)
+        Me.btnSelect.Enabled = False
+        Me.btnSelect.Location = New System.Drawing.Point(483, 562)
         Me.btnSelect.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(112, 35)
@@ -67,7 +71,7 @@ Partial Class frmMain
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(18, 641)
+        Me.btnCancel.Location = New System.Drawing.Point(18, 562)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(112, 35)
@@ -79,7 +83,7 @@ Partial Class frmMain
         '
         Me.lblProgram.AutoSize = True
         Me.lblProgram.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProgram.Location = New System.Drawing.Point(45, 178)
+        Me.lblProgram.Location = New System.Drawing.Point(45, 183)
         Me.lblProgram.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProgram.Name = "lblProgram"
         Me.lblProgram.Size = New System.Drawing.Size(64, 18)
@@ -89,7 +93,7 @@ Partial Class frmMain
         'txtProgram
         '
         Me.txtProgram.Enabled = False
-        Me.txtProgram.Location = New System.Drawing.Point(218, 178)
+        Me.txtProgram.Location = New System.Drawing.Point(218, 183)
         Me.txtProgram.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtProgram.Name = "txtProgram"
         Me.txtProgram.Size = New System.Drawing.Size(313, 28)
@@ -98,7 +102,7 @@ Partial Class frmMain
         'txtProgram_Code
         '
         Me.txtProgram_Code.Enabled = False
-        Me.txtProgram_Code.Location = New System.Drawing.Point(218, 218)
+        Me.txtProgram_Code.Location = New System.Drawing.Point(218, 223)
         Me.txtProgram_Code.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtProgram_Code.Name = "txtProgram_Code"
         Me.txtProgram_Code.Size = New System.Drawing.Size(313, 28)
@@ -108,7 +112,7 @@ Partial Class frmMain
         '
         Me.lblProgram_Code.AutoSize = True
         Me.lblProgram_Code.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProgram_Code.Location = New System.Drawing.Point(45, 218)
+        Me.lblProgram_Code.Location = New System.Drawing.Point(45, 223)
         Me.lblProgram_Code.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblProgram_Code.Name = "lblProgram_Code"
         Me.lblProgram_Code.Size = New System.Drawing.Size(97, 18)
@@ -118,7 +122,7 @@ Partial Class frmMain
         'txtDescription
         '
         Me.txtDescription.Enabled = False
-        Me.txtDescription.Location = New System.Drawing.Point(218, 258)
+        Me.txtDescription.Location = New System.Drawing.Point(218, 263)
         Me.txtDescription.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(313, 28)
@@ -128,7 +132,7 @@ Partial Class frmMain
         '
         Me.lblDescription.AutoSize = True
         Me.lblDescription.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescription.Location = New System.Drawing.Point(45, 258)
+        Me.lblDescription.Location = New System.Drawing.Point(45, 263)
         Me.lblDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(80, 18)
@@ -138,7 +142,7 @@ Partial Class frmMain
         'txtEpisode
         '
         Me.txtEpisode.Enabled = False
-        Me.txtEpisode.Location = New System.Drawing.Point(218, 296)
+        Me.txtEpisode.Location = New System.Drawing.Point(218, 301)
         Me.txtEpisode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtEpisode.Name = "txtEpisode"
         Me.txtEpisode.Size = New System.Drawing.Size(313, 28)
@@ -148,7 +152,7 @@ Partial Class frmMain
         '
         Me.lblEpisode.AutoSize = True
         Me.lblEpisode.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEpisode.Location = New System.Drawing.Point(45, 296)
+        Me.lblEpisode.Location = New System.Drawing.Point(45, 301)
         Me.lblEpisode.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEpisode.Name = "lblEpisode"
         Me.lblEpisode.Size = New System.Drawing.Size(57, 18)
@@ -158,7 +162,7 @@ Partial Class frmMain
         'txtEpisode_Code
         '
         Me.txtEpisode_Code.Enabled = False
-        Me.txtEpisode_Code.Location = New System.Drawing.Point(218, 333)
+        Me.txtEpisode_Code.Location = New System.Drawing.Point(218, 338)
         Me.txtEpisode_Code.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtEpisode_Code.Name = "txtEpisode_Code"
         Me.txtEpisode_Code.Size = New System.Drawing.Size(313, 28)
@@ -168,7 +172,7 @@ Partial Class frmMain
         '
         Me.lblEpisode_Code.AutoSize = True
         Me.lblEpisode_Code.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEpisode_Code.Location = New System.Drawing.Point(45, 333)
+        Me.lblEpisode_Code.Location = New System.Drawing.Point(45, 338)
         Me.lblEpisode_Code.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEpisode_Code.Name = "lblEpisode_Code"
         Me.lblEpisode_Code.Size = New System.Drawing.Size(90, 18)
@@ -178,7 +182,7 @@ Partial Class frmMain
         'txtLocation
         '
         Me.txtLocation.Enabled = False
-        Me.txtLocation.Location = New System.Drawing.Point(218, 371)
+        Me.txtLocation.Location = New System.Drawing.Point(218, 376)
         Me.txtLocation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtLocation.Name = "txtLocation"
         Me.txtLocation.Size = New System.Drawing.Size(313, 28)
@@ -188,7 +192,7 @@ Partial Class frmMain
         '
         Me.lblLocation.AutoSize = True
         Me.lblLocation.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLocation.Location = New System.Drawing.Point(45, 371)
+        Me.lblLocation.Location = New System.Drawing.Point(45, 376)
         Me.lblLocation.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLocation.Name = "lblLocation"
         Me.lblLocation.Size = New System.Drawing.Size(63, 18)
@@ -198,7 +202,7 @@ Partial Class frmMain
         'txtName
         '
         Me.txtName.Enabled = False
-        Me.txtName.Location = New System.Drawing.Point(218, 135)
+        Me.txtName.Location = New System.Drawing.Point(218, 140)
         Me.txtName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(313, 28)
@@ -208,7 +212,7 @@ Partial Class frmMain
         '
         Me.lblName.AutoSize = True
         Me.lblName.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(45, 138)
+        Me.lblName.Location = New System.Drawing.Point(45, 143)
         Me.lblName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(47, 18)
@@ -217,6 +221,10 @@ Partial Class frmMain
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ProgressBar1)
+        Me.GroupBox1.Controls.Add(Me.lblSource)
+        Me.GroupBox1.Controls.Add(Me.btnSelect_Source)
+        Me.GroupBox1.Controls.Add(Me.txtSource)
         Me.GroupBox1.Controls.Add(Me.txtDuration)
         Me.GroupBox1.Controls.Add(Me.lblExpected_Duration)
         Me.GroupBox1.Controls.Add(Me.txtSubject_ID)
@@ -225,7 +233,6 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.lblSourceID)
         Me.GroupBox1.Controls.Add(Me.txtProject_ID)
         Me.GroupBox1.Controls.Add(Me.lblProject_ID)
-        Me.GroupBox1.Controls.Add(Me.lblProjectInfo)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.txtName)
         Me.GroupBox1.Controls.Add(Me.lblProgram)
@@ -241,19 +248,109 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.txtDescription)
         Me.GroupBox1.Controls.Add(Me.txtEpisode)
         Me.GroupBox1.Controls.Add(Me.lblEpisode)
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 32)
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 14)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Size = New System.Drawing.Size(577, 599)
+        Me.GroupBox1.Size = New System.Drawing.Size(577, 538)
         Me.GroupBox1.TabIndex = 18
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Select a Project"
         '
+        'txtDuration
+        '
+        Me.txtDuration.Enabled = False
+        Me.txtDuration.Location = New System.Drawing.Point(218, 528)
+        Me.txtDuration.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtDuration.Name = "txtDuration"
+        Me.txtDuration.Size = New System.Drawing.Size(313, 28)
+        Me.txtDuration.TabIndex = 27
+        '
+        'lblExpected_Duration
+        '
+        Me.lblExpected_Duration.AutoSize = True
+        Me.lblExpected_Duration.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblExpected_Duration.Location = New System.Drawing.Point(45, 528)
+        Me.lblExpected_Duration.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblExpected_Duration.Name = "lblExpected_Duration"
+        Me.lblExpected_Duration.Size = New System.Drawing.Size(65, 18)
+        Me.lblExpected_Duration.TabIndex = 26
+        Me.lblExpected_Duration.Text = "Duration:"
+        '
+        'txtSubject_ID
+        '
+        Me.txtSubject_ID.Enabled = False
+        Me.txtSubject_ID.Location = New System.Drawing.Point(218, 490)
+        Me.txtSubject_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtSubject_ID.Name = "txtSubject_ID"
+        Me.txtSubject_ID.Size = New System.Drawing.Size(313, 28)
+        Me.txtSubject_ID.TabIndex = 25
+        '
+        'lblSubjectID
+        '
+        Me.lblSubjectID.AutoSize = True
+        Me.lblSubjectID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSubjectID.Location = New System.Drawing.Point(45, 490)
+        Me.lblSubjectID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSubjectID.Name = "lblSubjectID"
+        Me.lblSubjectID.Size = New System.Drawing.Size(71, 18)
+        Me.lblSubjectID.TabIndex = 24
+        Me.lblSubjectID.Text = "Subject ID:"
+        '
+        'txtSource_ID
+        '
+        Me.txtSource_ID.Enabled = False
+        Me.txtSource_ID.Location = New System.Drawing.Point(218, 452)
+        Me.txtSource_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtSource_ID.Name = "txtSource_ID"
+        Me.txtSource_ID.Size = New System.Drawing.Size(313, 28)
+        Me.txtSource_ID.TabIndex = 23
+        '
+        'lblSourceID
+        '
+        Me.lblSourceID.AutoSize = True
+        Me.lblSourceID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSourceID.Location = New System.Drawing.Point(45, 452)
+        Me.lblSourceID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSourceID.Name = "lblSourceID"
+        Me.lblSourceID.Size = New System.Drawing.Size(67, 18)
+        Me.lblSourceID.TabIndex = 22
+        Me.lblSourceID.Text = "Source ID:"
+        '
+        'txtProject_ID
+        '
+        Me.txtProject_ID.Enabled = False
+        Me.txtProject_ID.Location = New System.Drawing.Point(218, 414)
+        Me.txtProject_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtProject_ID.Name = "txtProject_ID"
+        Me.txtProject_ID.Size = New System.Drawing.Size(313, 28)
+        Me.txtProject_ID.TabIndex = 21
+        '
+        'lblProject_ID
+        '
+        Me.lblProject_ID.AutoSize = True
+        Me.lblProject_ID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProject_ID.Location = New System.Drawing.Point(45, 414)
+        Me.lblProject_ID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblProject_ID.Name = "lblProject_ID"
+        Me.lblProject_ID.Size = New System.Drawing.Size(69, 18)
+        Me.lblProject_ID.TabIndex = 20
+        Me.lblProject_ID.Text = "Project ID:"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(50, 31)
+        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(481, 28)
+        Me.ComboBox1.TabIndex = 18
+        Me.ComboBox1.Text = "Please select a project from the list..."
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.WebBrowser1)
-        Me.GroupBox2.Location = New System.Drawing.Point(612, 32)
+        Me.GroupBox2.Location = New System.Drawing.Point(644, 32)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -261,6 +358,7 @@ Partial Class frmMain
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Help"
+        Me.GroupBox2.Visible = False
         '
         'WebBrowser1
         '
@@ -272,110 +370,56 @@ Partial Class frmMain
         Me.WebBrowser1.Size = New System.Drawing.Size(458, 568)
         Me.WebBrowser1.TabIndex = 0
         '
-        'ComboBox1
+        'txtSource
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(50, 78)
-        Me.ComboBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(481, 28)
-        Me.ComboBox1.TabIndex = 18
+        Me.txtSource.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtSource.Enabled = False
+        Me.txtSource.HideSelection = False
+        Me.txtSource.Location = New System.Drawing.Point(50, 67)
+        Me.txtSource.Name = "txtSource"
+        Me.txtSource.Size = New System.Drawing.Size(444, 28)
+        Me.txtSource.TabIndex = 28
+        Me.txtSource.Text = "Please select your DVD Source..."
+        Me.txtSource.Visible = False
         '
-        'lblProjectInfo
+        'btnSelect_Source
         '
-        Me.lblProjectInfo.AutoSize = True
-        Me.lblProjectInfo.Location = New System.Drawing.Point(45, 40)
-        Me.lblProjectInfo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblProjectInfo.Name = "lblProjectInfo"
-        Me.lblProjectInfo.Size = New System.Drawing.Size(247, 20)
-        Me.lblProjectInfo.TabIndex = 19
-        Me.lblProjectInfo.Text = "Please select a project from the list..."
+        Me.btnSelect_Source.Enabled = False
+        Me.btnSelect_Source.Location = New System.Drawing.Point(502, 68)
+        Me.btnSelect_Source.Name = "btnSelect_Source"
+        Me.btnSelect_Source.Size = New System.Drawing.Size(29, 27)
+        Me.btnSelect_Source.TabIndex = 29
+        Me.btnSelect_Source.Text = "..."
+        Me.btnSelect_Source.UseVisualStyleBackColor = True
+        Me.btnSelect_Source.Visible = False
         '
-        'txtProject_ID
+        'lblSource
         '
-        Me.txtProject_ID.Enabled = False
-        Me.txtProject_ID.Location = New System.Drawing.Point(218, 409)
-        Me.txtProject_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtProject_ID.Name = "txtProject_ID"
-        Me.txtProject_ID.Size = New System.Drawing.Size(313, 28)
-        Me.txtProject_ID.TabIndex = 21
+        Me.lblSource.AutoSize = True
+        Me.lblSource.Enabled = False
+        Me.lblSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblSource.Font = New System.Drawing.Font("Palatino Linotype", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSource.Location = New System.Drawing.Point(57, 98)
+        Me.lblSource.Name = "lblSource"
+        Me.lblSource.Size = New System.Drawing.Size(287, 14)
+        Me.lblSource.TabIndex = 30
+        Me.lblSource.Text = "NOTE: You must select the VIDEO_TS Folder of your DVD."
+        Me.lblSource.Visible = False
         '
-        'lblProject_ID
+        'ProgressBar1
         '
-        Me.lblProject_ID.AutoSize = True
-        Me.lblProject_ID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProject_ID.Location = New System.Drawing.Point(45, 409)
-        Me.lblProject_ID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblProject_ID.Name = "lblProject_ID"
-        Me.lblProject_ID.Size = New System.Drawing.Size(69, 18)
-        Me.lblProject_ID.TabIndex = 20
-        Me.lblProject_ID.Text = "Project ID:"
-        '
-        'txtSource_ID
-        '
-        Me.txtSource_ID.Enabled = False
-        Me.txtSource_ID.Location = New System.Drawing.Point(218, 447)
-        Me.txtSource_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtSource_ID.Name = "txtSource_ID"
-        Me.txtSource_ID.Size = New System.Drawing.Size(313, 28)
-        Me.txtSource_ID.TabIndex = 23
-        '
-        'lblSourceID
-        '
-        Me.lblSourceID.AutoSize = True
-        Me.lblSourceID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSourceID.Location = New System.Drawing.Point(45, 447)
-        Me.lblSourceID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSourceID.Name = "lblSourceID"
-        Me.lblSourceID.Size = New System.Drawing.Size(67, 18)
-        Me.lblSourceID.TabIndex = 22
-        Me.lblSourceID.Text = "Source ID:"
-        '
-        'txtSubject_ID
-        '
-        Me.txtSubject_ID.Enabled = False
-        Me.txtSubject_ID.Location = New System.Drawing.Point(218, 485)
-        Me.txtSubject_ID.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtSubject_ID.Name = "txtSubject_ID"
-        Me.txtSubject_ID.Size = New System.Drawing.Size(313, 28)
-        Me.txtSubject_ID.TabIndex = 25
-        '
-        'lblSubjectID
-        '
-        Me.lblSubjectID.AutoSize = True
-        Me.lblSubjectID.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSubjectID.Location = New System.Drawing.Point(45, 485)
-        Me.lblSubjectID.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSubjectID.Name = "lblSubjectID"
-        Me.lblSubjectID.Size = New System.Drawing.Size(71, 18)
-        Me.lblSubjectID.TabIndex = 24
-        Me.lblSubjectID.Text = "Subject ID:"
-        '
-        'txtDuration
-        '
-        Me.txtDuration.Enabled = False
-        Me.txtDuration.Location = New System.Drawing.Point(218, 523)
-        Me.txtDuration.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtDuration.Name = "txtDuration"
-        Me.txtDuration.Size = New System.Drawing.Size(313, 28)
-        Me.txtDuration.TabIndex = 27
-        '
-        'lblExpected_Duration
-        '
-        Me.lblExpected_Duration.AutoSize = True
-        Me.lblExpected_Duration.Font = New System.Drawing.Font("Palatino Linotype", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblExpected_Duration.Location = New System.Drawing.Point(45, 523)
-        Me.lblExpected_Duration.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblExpected_Duration.Name = "lblExpected_Duration"
-        Me.lblExpected_Duration.Size = New System.Drawing.Size(65, 18)
-        Me.lblExpected_Duration.TabIndex = 26
-        Me.lblExpected_Duration.Text = "Duration:"
+        Me.ProgressBar1.Enabled = False
+        Me.ProgressBar1.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.ProgressBar1.Location = New System.Drawing.Point(48, 128)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(483, 23)
+        Me.ProgressBar1.TabIndex = 31
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1113, 690)
+        Me.ClientSize = New System.Drawing.Size(992, 611)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnCancel)
@@ -383,7 +427,8 @@ Partial Class frmMain
         Me.Font = New System.Drawing.Font("Palatino Linotype", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "frmMain"
-        Me.Text = "Form1"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "DVDImport Advanced"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -410,7 +455,6 @@ Partial Class frmMain
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents WebBrowser1 As System.Windows.Forms.WebBrowser
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents lblProjectInfo As System.Windows.Forms.Label
     Friend WithEvents txtDuration As System.Windows.Forms.TextBox
     Friend WithEvents lblExpected_Duration As System.Windows.Forms.Label
     Friend WithEvents txtSubject_ID As System.Windows.Forms.TextBox
@@ -419,5 +463,9 @@ Partial Class frmMain
     Friend WithEvents lblSourceID As System.Windows.Forms.Label
     Friend WithEvents txtProject_ID As System.Windows.Forms.TextBox
     Friend WithEvents lblProject_ID As System.Windows.Forms.Label
+    Friend WithEvents btnSelect_Source As System.Windows.Forms.Button
+    Friend WithEvents txtSource As System.Windows.Forms.TextBox
+    Friend WithEvents lblSource As System.Windows.Forms.Label
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 
 End Class

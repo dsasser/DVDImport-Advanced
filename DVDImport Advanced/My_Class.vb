@@ -32,7 +32,8 @@ Public Class My_Class
         'Return the result
         Return strReturn
     End Function
-    Public Shared Sub LoginToDrupal()
+    Public Shared Function LoginToDrupal()
+
         Dim query As String = "select * from users where name=? and pass=?"
         'Define the SQL Command to retrieve records from the database
         Dim cmd As New Odbc.OdbcCommand(query, frmMain.drupal_cn)
@@ -60,13 +61,17 @@ Public Class My_Class
             Loop
             Debug.Print(frmMain.strUsername & " has been successfully authenticated with Drupal ID " & frmMain.strDrupal_ID & " at " & Date.Now & vbCrLf)
             'show the main form and clean up things
+            frmMain.blnIsLoggedIn = True
+            Return frmMain.blnIsLoggedIn
         Else
             ' Incorrect Login Details Supplied
             'ErrorProvider1.SetError(Me.OK, "Incorrect Login...Try again")
             MsgBox("Incorrect username or password provided, please try again")
             frmLogin.PasswordTextBox.Clear()
+            frmMain.blnIsLoggedIn = False
+            Return frmMain.blnIsLoggedIn
         End If
-    End Sub
+    End Function
     Public Shared Sub GetFacilProducer_ID()
         'get Producer_ID stored in Drupal user profile
         Dim cmd As New Odbc.OdbcCommand("select value from profile_values where uid=?", frmMain.drupal_cn)
@@ -142,14 +147,11 @@ Public Class My_Class
         sql = sql & "Iif([OldProjectNum] Is Not Null,[OldProjectNum],0) AS OldProjectNum_, "
         sql = sql & "Iif([ProjectReviseDate] Is Not Null,[ProjectReviseDate],0) AS ProjectReviseDate_, "
         sql = sql & "Iif([ProjectReviseStaff] Is Not Null,[ProjectReviseStaff],0) AS ProjectReviseStaff_, "
-        'sql = sql & "Second([DefaultLength]) AS Duration_Seconds, "
-        'sql = sql & "Minute([DefaultLength]) As Duration_Minutes, "
-        'sql = sql & "Hour([DefaultLength]) As Duration_Hours "
         sql = sql & "Iif([DefaultLength] Is Not Null,Second([DefaultLength])+ Minute([DefaultLength])*60+Hour([DefaultLength])*3600,0) AS Total_Seconds " 'nasty hack to get the duration in seconds
         sql = sql & " FROM(tblProject)WHERE ProducerID = " & frmMain.strProducer_ID
 
 
-        MsgBox(sql)
+        'MsgBox(sql)
 
         Try
             frmMain.facil_cn.Open()
@@ -216,11 +218,11 @@ Public Class My_Class
     End Sub
     Public Shared Sub GetProjectDefaults()
 
-        'fill in the textboxes
-        frmMain.txtName.Text = frmMain.strUsername
-        frmMain.txtProgram.Text = frmMain.strProgram(frmMain.ComboBox1.SelectedIndex)
-        frmMain.txtProgram_Code.Text = "Not Set"
-        frmMain.txtDescription.Text = frmMain.strDescription(frmMain.ComboBox1.SelectedIndex)
+        'set the text boxes for debug only
+        frmMain.txtName.Text = frmMain.strUsername 'Username
+        frmMain.txtProgram.Text = frmMain.strProgram(frmMain.ComboBox1.SelectedIndex) 'Program Name (project name)
+        frmMain.txtProgram_Code.Text = "Not Set" 'Program Code
+        frmMain.txtDescription.Text = frmMain.strDescription(frmMain.ComboBox1.SelectedIndex) 'Description
         frmMain.txtEpisode.Text = frmMain.strEpisode(frmMain.ComboBox1.SelectedIndex)
         frmMain.txtEpisode_Code.Text = "Not Set"
         frmMain.txtLocation.Text = System.Environment.MachineName
@@ -228,9 +230,6 @@ Public Class My_Class
         frmMain.txtSource_ID.Text = frmMain.strSource_ID(frmMain.ComboBox1.SelectedIndex)
         frmMain.txtSubject_ID.Text = frmMain.strSubject_ID(frmMain.ComboBox1.SelectedIndex)
         frmMain.txtDuration.Text = frmMain.strExpected_Duration(frmMain.ComboBox1.SelectedIndex)
-
-
-
 
         'Else
         'Console.WriteLine("No project selected. {My_Class.GetProjectDefaults()}")
@@ -241,48 +240,13 @@ Public Class My_Class
 
 
     End Sub
-
     Public Shared Sub GetApplicationDefaults()
-        Dim intWidth As Integer
-        'setup ListView1
-        'Add the column headers.
-        'intWidth = frmMain.ListView1.Width - 5
-        'frmMain.ListView1.Columns.Add("Project Title", 700)
-        'frmMain.ListView1.Columns.Add("Project ID", 30)
-        'frmMain.ListView1.Columns.Add("Project Description", 30)
-        'frmMain.ListView1.Columns.Add("Producer ID", 30)
-        'frmMain.ListView1.Columns.Add("Project Series", 30)
-        'frmMain.ListView1.Columns.Add("Project Source ID", 30)
-        'frmMain.ListView1.Columns.Add("Subject ID", 30) 'CInt(intWidth / 7))
-        'frmMain.ListView1.MultiSelect = False
-        'frmMain.ListView1.FullRowSelect = True
-        'frmMain.ListView1.GridLines = True
-        'frmMain.ListView1.View = View.Details
+
+        frmMain.Visible = False 'make this invisible unless logged in
 
         'setup WebBrowser1
-        Dim NewURI As New Uri("Http://sandbox/test/dvdimport.html")
-        frmMain.WebBrowser1.Navigate(NewURI)
+        'Dim NewURI As New Uri("Http://sandbox/test/dvdimport.html")
+        'frmMain.WebBrowser1.Navigate(NewURI)
 
-        ''Add some list view items.
-        'objItem = ListView1.Items.Add("AAAAA")
-        'With objItem
-        '    .SubItems.Add("123 Main St.")
-        '    .SubItems.Add("555-555-5555")
-        '    .SubItems.Add("555-555-5555")
-        '    .ImageIndex = 0
-        'End With
-
-        'objItem = ListView1.Items.Add("BBBBB")
-        'With objItem
-        '    .SubItems.Add("456 Main St.")
-        '    .SubItems.Add("555-555-5555")
-        '    .SubItems.Add("555-555-5555")
-        '    .ImageIndex = 0
-        'End With
-
-        'frmMain.ListView1.Columns.Add("Project Title", 100, HorizontalAlignment.Left)
-        'frmMain.ListView1.Columns.Add("Project ID", 100, HorizontalAlignment.Left)
-        'frmMain.ListView1.Items.Add("Project Title", "Test", 0)
-        'frmMain.ListView1.Items.Add("Project ID", "Test 2", 1)
     End Sub
 End Class

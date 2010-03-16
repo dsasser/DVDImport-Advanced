@@ -12,8 +12,14 @@ Public Class frmLogin
     ' such as the username, display name, etc.
 
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
-        My_Class.LoginToDrupal()
-        Me.Close()
+        Dim result As Boolean = My_Class.LoginToDrupal
+        If result = True Then
+            Me.Close()
+        Else
+            Me.Visible = True
+            Me.Focus()
+        End If
+
     End Sub
 
     Private Sub Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel.Click

@@ -33,6 +33,7 @@ Public Class frmMain
     Public strSource_ID() As String 'Facil Source_ID from Project Defaults
     Public strSubject_ID() As String 'Facil SubjectID from Project Defaults
     Public i As Integer = 0 'counter
+    Public blnIsLoggedIn As Boolean = False
 
 #End Region
 
@@ -43,11 +44,18 @@ Public Class frmMain
         'Open Drupal Database
         My_Class.OpenDrupalDatabase()
         'Do login procedure
+
         frmLogin.ShowDialog()
         'Get Producer ID from Drupal
-        My_Class.GetFacilProducer_ID()
+        If blnIsLoggedIn = True Then
+            My_Class.GetFacilProducer_ID()
+        End If
+
         'Open Facil Database
-        My_Class.OpenFacilDatabase()
+        If blnIsLoggedIn = True Then
+            My_Class.OpenFacilDatabase()
+        End If
+
         'Get Projects from Facil and place into listbox
         'My_Class.AddProjects()
         'User Selects a Project
@@ -75,15 +83,40 @@ Public Class frmMain
             MsgBox("You must select a project from the drop down list")
             ComboBox1.Focus()
         Else 'project has been selected and ok to move on
+            'enable the 
             'code to move on
+            ProgressBar1.Value = 100
         End If
         
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) _
     Handles ComboBox1.SelectedIndexChanged
-        My_Class.GetProjectDefaults()
+        If ComboBox1.SelectedIndex >= 0 Then
+            My_Class.GetProjectDefaults()
+            txtSource.Visible = True 'enable viewing the dvd source text box
+            btnSelect_Source.Enabled = True 'enable the dvd source select button
+            btnSelect_Source.Visible = True
+            btnSelect_Source.Focus()
+            lblSource.Visible = True 'enable the source help text label view
+
+        End If
+
     End Sub
 
 
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        End
+    End Sub
+
+    Private Sub btnSelect_Source_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect_Source.Click
+        ProgressBar1.Enabled = True
+        ProgressBar1.Visible = True
+        btnSelect.Enabled = True
+        txtSource.Text = "D:\VIDEO_TS"
+    End Sub
+
+    Private Sub txtSource_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSource.TextChanged
+
+    End Sub
 End Class
